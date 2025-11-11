@@ -8,22 +8,40 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.arcrobotics.ftclib.geometry.Vector2d;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.arcrobotics.ftclib.command.SubsystemBase;
+import com.arcrobotics.ftclib.gamepad.GamepadEx;
 
-public class Chassis {
+public class Chassis extends SubsystemBase {
 
-Motor frontLeft = new Motor();
-Motor frontRight = new Motor();
-Motor backLeft = new Motor();
-Motor backRight = new Motor();
-MecanumDrive mecanumDrive = new MecanumDrive(true, frontLeft, frontRight,backLeft,backRight);
+
+MecanumDrive mecanumDrive;
+
+
+public Chassis(HardwareMap hrdMap) {
+    Motor frontLeft = new Motor(hrdMap, "frontLeftMotor");
+    Motor frontRight = new Motor(hrdMap,"frontRightMotor");
+    Motor backLeft = new Motor(hrdMap, "backLeftMotor");
+    Motor backRight = new Motor(hrdMap, "backRightMotor");
+//creating motors
+
+    mecanumDrive = new MecanumDrive(true, frontLeft,frontRight,backLeft,backRight);
+
+}
 
 
 
 public void fieldOriented(double strafeSpeed,double forwardSpeed, double turn, double heading) {
     mecanumDrive.driveFieldCentric(strafeSpeed, forwardSpeed, turn, heading);
+    //field oriented
 }
-public void robotOriented(double strafeSpeed, double forwardSpeed, double turnSpeed) {
-    mecanumDrive.driveRobotCentric(strafeSpeed, forwardSpeed, turnSpeed);
+public void robotOriented(double strafeSpeed, double forwardSpeed, double turnSpeed, boolean slowMode) {
+    if (slowMode) {
+        mecanumDrive.driveRobotCentric(strafeSpeed/2, forwardSpeed/2, turnSpeed/2);
+    } else {
+        mecanumDrive.driveRobotCentric(strafeSpeed,forwardSpeed,turnSpeed);
+    }
+
+    //robot oriented
 }
 
 

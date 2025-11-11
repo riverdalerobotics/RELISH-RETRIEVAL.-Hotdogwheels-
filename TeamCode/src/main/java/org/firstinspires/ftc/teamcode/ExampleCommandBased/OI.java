@@ -5,6 +5,9 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys.Button;
 
+
+
+
 public class OI {
     GamepadEx driver, operator;
     public OI(GamepadEx driver, GamepadEx operator){
@@ -15,8 +18,12 @@ public class OI {
         return new GamepadButton(
                 operator, Button.A
         );
+
+
+
+        }
     }
-}
+
 
 
 

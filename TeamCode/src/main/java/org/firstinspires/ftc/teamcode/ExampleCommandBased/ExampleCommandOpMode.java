@@ -9,6 +9,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class ExampleCommandOpMode extends CommandOpMode {
 
     ExampleSubsystem subsystem;
+    Chassis chassis;
+
     OI oi = new OI(new GamepadEx(gamepad1), new GamepadEx(gamepad2));
     @Override
     public void initialize(){
@@ -18,6 +20,7 @@ public class ExampleCommandOpMode extends CommandOpMode {
     public void run(){
         super.run();
         oi.intake().whenPressed(new ExampleCommand(subsystem));
+
     }
 
 

@@ -26,7 +26,7 @@ public class driveCommand extends CommandBase {
 
     public void execute() {
         super.execute();
-        drive.robotOriented(drivingPadYippee.getLeftX(), drivingPadYippee.getLeftY(), drivingPadYippee.getRightX(), drivingPadYippee.getButton(GamepadKeys.Button.B));
+        drive.fieldOriented(drivingPadYippee.getLeftX(), drivingPadYippee.getLeftY(), drivingPadYippee.getRightX());
     }
 
     public void end(boolean interrupted) {

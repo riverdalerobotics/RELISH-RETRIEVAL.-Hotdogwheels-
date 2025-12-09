@@ -12,6 +12,10 @@ public class Constants {
        public static final int POSITION_TWO = 0;
        public static final int POSITION_THREE = 0;
        public static final double TURNING_SPEED = 0.1;
+       public static final int POSITION_ONE_INTAKE = 0;
+       public static final int POSITION_TWO_INTAKE = 0;
+       public static final int POSITION_THREE_INTAKE = 0;
+
     }
 
     public static class chassisConstants {
@@ -19,7 +23,7 @@ public class Constants {
     }
 
     public static class intakeConstants {
-        public static final int SPIN_SPEED = 1;
+        public static final double SPIN_SPEED = 0.4;
     }
 
     public static class shooterConstants {
@@ -29,6 +33,8 @@ public class Constants {
     public static class indexerConstants {
         public static final double BELT_SPEED = 0.2;
         public static final double SERVO_SPEED = 0.2;
+        public static final double MAX_POSITION = 1;
+        public static final double MIN_POSITION = 0.1;
     }
 
 

@@ -1,0 +1,27 @@
+package org.firstinspires.ftc.teamcode.ExampleCommandBased;
+
+import com.arcrobotics.ftclib.command.Command;
+import com.arcrobotics.ftclib.command.CommandBase;
+import com.arcrobotics.ftclib.command.CommandGroupBase;
+import com.arcrobotics.ftclib.command.SequentialCommandGroup;
+
+public class grpShootOutake3 extends SequentialCommandGroup {
+
+    Revolver barrel;
+    Shooter shooter;
+    Indexer index;
+
+    public grpShootOutake3() {
+        addCommands(
+
+                new gotoOutakeBarrel3(barrel),
+
+                new LiftyCommand(index),
+
+                new ShooterCommand(shooter),
+
+                new LiftyDownyCommand(index)
+
+        );
+    }
+}

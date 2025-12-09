@@ -21,6 +21,14 @@ public class OIHotdog {
         );
     }
 
+    public GamepadButton shooting1() {
+        return new GamepadButton(
+                operator, Button.A
+        );
+    }
+    public boolean intakeYes() {
+        return operator.getButton(Button.B);
+    }
 
 
 

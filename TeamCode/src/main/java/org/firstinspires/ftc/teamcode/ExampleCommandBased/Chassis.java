@@ -10,28 +10,37 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
+import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.ImuOrientationOnRobot;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class Chassis extends SubsystemBase {
 
 
 MecanumDrive mecanumDrive;
 
-
-public Chassis(HardwareMap hrdMap) {
+IMU imu;
+public Chassis(HardwareMap hrdMap, IMU imu) {
     Motor frontLeft = new Motor(hrdMap, "frontLeftMotor");
     Motor frontRight = new Motor(hrdMap,"frontRightMotor");
     Motor backLeft = new Motor(hrdMap, "backLeftMotor");
     Motor backRight = new Motor(hrdMap, "backRightMotor");
-//creating motors
+    this.imu = imu;
 
+//creating motors+
     mecanumDrive = new MecanumDrive(true, frontLeft,frontRight,backLeft,backRight);
 
 }
 
 
 
-public void fieldOriented(double strafeSpeed,double forwardSpeed, double turn, double heading) {
-    mecanumDrive.driveFieldCentric(strafeSpeed, forwardSpeed, turn, heading);
+public void fieldOriented(double strafeSpeed, double forwardSpeed, double turn) {
+    double yaw = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS); // calculated from IMU
+
+    double rotX = (strafeSpeed * Math.cos(-yaw)) - (forwardSpeed * Math.sin(-yaw));
+    double rotY = (strafeSpeed * Math.sin(-yaw)) + (forwardSpeed * Math.cos(-yaw));
+    mecanumDrive.driveFieldCentric(rotX, rotY, turn, yaw);
     //field oriented
 }
 public void robotOriented(double strafeSpeed, double forwardSpeed, double turnSpeed, boolean slowMode) {
